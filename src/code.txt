@@ -1,0 +1,74 @@
+Explain code
+
+1. @submit.prevent
+ - When you click the submit button, it stops the page from refreshing.
+ - Make the form work smoothy without reloading
+  for example code: <form @submit.prevent="">
+
+2. v-model
+ - Connects the input field to the data
+ - When you type sth, it automatically saves what you typed
+  for example code: <input v-model="" placeholder="" required />
+
+3. form.company
+ - Just a place to store the company name
+ - part of the form data
+  for example code: <input v-model="" placeholder="" required />
+
+4. placeholder and required
+ - Placeholder: shows helpful text when the field is empty
+ - required: Make sure you fill in important information
+  for example code: <input v-model="" placeholder="" required />
+ 
+5. textarea and row ="2"
+ - textarea: A bigger box for writing longer notes
+ - rows="2" : Makes the box 2 line tall
+  for example code: <textarea v-model="" placeholder="Notes..." rows="2"></textarea> 
+
+5. div v-if
+ - div(division) is the most basic container element in HTML 
+ - It's used to group and sturcture other elements 
+ - v-if is.. As Vue's directive, "show this element on screen only when this condition is true"
+ - v-if="applications.length" -> The list is only displayed on the screen when you register at least one application.
+ - v-for="(app, index) in application"
+   -> app: current item in array (individual application object)
+   -> index: order of the current item in the array (staring from 0)
+   -> key="index" : unique identifier for each item 
+    so, Repeat each item(app)in applications array, create a div by that number, and use each index as a key to distinguish it uniquelty
+
+=========================================
+  for example code: 
+  <div v-if="applications.length">
+  <div v-for="(app, index) in applications" :key="index">
+    <strong>{{ app.company }}</strong> – {{ app.position }}<br />
+    Date: {{ app.date }} | Score: {{ app.score }}%<br />
+    <em>{{ app.notes }}</em><br />
+    <button @click="removeApplication(index)">Delete</button>
+  </div>
+  </div>
+==========================================
+
+if i analyze the entire code above, it is as follows.
+
+1. if there is at least one job application, then show this block
+  - v-if="applications.length"
+
+2. loop through each job application in the list. 
+  - v-for="(app, index) in applications"
+  - app: one job application item
+  - index: its number in the list (0, 1, 2...)
+
+3. helps Vue keep track of each item
+  - :key="index" -> It’s like giving each row a name or ID.
+
+4. detail function inside the loop
+   - show the company name in bold 
+     - <strong>{{ app.company }}</strong>
+   - show the job position next to it
+     - – {{ app.position }}
+   - how much this application matches the job
+     - Score: {{ app.score }}%
+
+
+
+ 
