@@ -1,5 +1,6 @@
 Explain code
 
+<HTML>
 1. @submit.prevent
  - When you click the submit button, it stops the page from refreshing.
  - Make the form work smoothy without reloading
@@ -70,5 +71,55 @@ if i analyze the entire code above, it is as follows.
      - Score: {{ app.score }}%
 
 
-
+<Script>
+1. importing basic Vue features.
+2. reactive object that stores user input.
+3. An empty array that will store all the job applications.
+4. When the app starts, load stored data in localstorage.
+5. check if anything changes as add or delete.
+6. takes the user input from form
+7. delete one item from the list
  
+ App flow
+            ┌────────────────────┐
+            │ User fills the form│
+            │  (Company, Date...)│
+            └────────┬───────────┘
+                     │
+                     ▼
+           ┌──────────────────────┐
+           │ Clicks "Add" button  │
+           └────────┬─────────────┘
+                    ▼
+        ┌────────────────────────────┐
+        │ addApplication() function │
+        └────────┬──────────────────┘
+                 ▼
+     ┌───────────────────────────────┐
+     │ Data is pushed to applications│
+     └────────┬──────────────────────┘
+              ▼
+ ┌─────────────────────────────────────┐
+ │ List updates → page displays each  │
+ │ item using v-for loop              │
+ └────────────────┬───────────────────┘
+                  ▼
+       ┌────────────────────┐
+       │ watch() detects it │
+       └────────┬───────────┘
+                ▼
+     ┌────────────────────────────┐
+     │ Data is saved to           │
+     │ localStorage               │
+     └────────────────────────────┘
+
+       ⬇ Next time you open the page:
+
+           ┌────────────────────────────┐
+           │ onMounted() loads saved   │
+           │ applications from browser │
+           └────────────┬──────────────┘
+                        ▼
+               ┌────────────────────┐
+               │ Page shows them!   │
+               └────────────────────┘

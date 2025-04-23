@@ -28,14 +28,20 @@
       <p>No applications yet.</p>
     </div>
 
-
   </div>
 </template>
 
-<script setup>
-import { ref, watch, onMounted } from 'vue'
 
+
+<script setup>
+import { ref, watch, onMounted } from 'vue' // Import Vue core functions
+// ref: create a reactive reference to a value.
+// watch: track changes to a value.
+// onMounted: when the page loads, run this function.
+
+// Define a form object with fields for company, position, date, score, and notes
 const form = ref({
+  // Initialize form fields with empty values
   company: '',
   position: '',
   date: '',
@@ -43,28 +49,53 @@ const form = ref({
   notes: ''
 })
 
-const applications = ref([])
 
+const applications = ref([]) 
+
+// when the page loads, check if there is any saved data in local storage
 onMounted(() => {
   const saved = localStorage.getItem('applications')
   if (saved) applications.value = JSON.parse(saved)
 })
 
+// if user add or remove an application, save the data to local storage (keep the data)
 watch(applications, (newVal) => {
   localStorage.setItem('applications', JSON.stringify(newVal))
 }, { deep: true })
 
+
+// When user input data and click "Add" button, add the data to the applications array
 function addApplication() {
   applications.value.push({ ...form.value })
   form.value = { company: '', position: '', date: '', score: 0, notes: '' }
 }
 
+// When user remove an data from the list, remove the data
 function removeApplication(index) {
   applications.value.splice(index, 1)
 }
 </script>
 
-<!-- Style removed for learning HTML + JS logic first -->
-<style scoped>
-/* Styles temporarily removed for practicing raw Vue structure */
+
+<style>
+/* minimum and clean default styles */
+
+body{
+  font-family: sans-serif; /* font family */
+  padding: 20px; /* padding */
+  background: #18a7b2; /* background color */
+}
+
+input, textarea, button{
+  margin: 20px 0ch; /* margin */
+  width: 80%; /* width */
+  padding: 10px; /* thickenss box */
+  font-size: 15px; /* font size */
+}
+
+button{
+  cursor: pointer; /* cursor */
+}
+
+
 </style>
