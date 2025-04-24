@@ -52,7 +52,7 @@
             </td>
             <!-- Position inline editable -->
              <td @click="startEdit(index, 'position')">
-              <template v-if="editing.row === index && editing.field === 'postion'">
+              <template v-if="editing.row === index && editing.field === 'position'">
                 <input v-model="app.position" @blur="stopEdit" @keyup.enter="stopEdit" class="inline-input" />
               </template>
               <template v-else>
