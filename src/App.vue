@@ -2,8 +2,12 @@
   <div>
     <h1>Job Application Tracker</h1> <!-- Title of the page -->
 
+    <button @click="toggleForm">
+      {{ showForm ? 'Hide Form' : 'New Application' }}
+    </button>
+
     <!-- Form to add a new application -->
-    <form @submit.prevent="addApplication"> 
+    <form @submit.prevent="addApplication" v-if="showForm">
       <input v-model="form.company" placeholder="Company" required /> <!-- Company input field -->
       <input v-model="form.location" placeholder="Location" required /> <!-- Location  input field -->
       <input v-model="form.position" placeholder="Position" required /> <!-- Position input field -->
@@ -139,6 +143,7 @@ const form = ref({
 
 const applications = ref([]) // Create a reactive reference to an empty array
 const editing = ref({ row: null, field: null })
+const showForm = ref(false) // Add this line to control form visibility
 
 // when the page loads, check if there is any saved data in local storage
 onMounted(() => {
@@ -177,6 +182,10 @@ function startEdit(row, field){
 
 function stopEdit() {
   editing.value = { row: null, field: null }
+}
+
+function toggleForm() {
+  showForm.value = !showForm.value
 }
 </script>
 
