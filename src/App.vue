@@ -92,47 +92,92 @@ function removeApplication(index) {
 <style>
 /* minimum and clean default styles */
 
-body{
-  font-family: sans-serif; /* font family */
-  padding: 20px; /* padding */
-  background: #01042c; /* background color */
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  padding: 40px;
+  background-color: #01042c;
+  color: white;
+}
+
+h1 {
+  color: #acf3ea;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 12px;
+  max-width: 600px;
+  margin: 0 auto 40px auto;
 }
 
-input, textarea, button{
-  margin: 20px 0ch; /* margin */
-  width: 100%; /* width */
-  padding: 10px; /* thickenss box */
-  font-size: 20px; /* font size */
+input, textarea {
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  background: #2e2e2e;
+  color: white;
 }
 
-button{
-  cursor: pointer; /* cursor */
+input::placeholder, textarea::placeholder {
+  color: #aaaaaa;
+}
+
+button {
+  background: black;
+  color: white;
+  font-weight: bold;
+  border: 2px solid white;
+  padding: 10px;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: white;
+  color: black;
 }
 
 table {
   width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
   border-collapse: collapse;
-  background: rgb(45, 184, 202);
-  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  background: #2bb5c7;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  border-radius: 6px;
+  overflow: hidden;
 }
 
 th, td {
-  font-size: 20px;
-  color:black;
-  padding: 10px;
-  border: 1px solid #000000;
+  padding: 14px;
+  font-size: 16px;
   text-align: left;
+  border-bottom: 1px solid #000;
 }
 
 th {
-  background-color: #5e5e5e;
+  background-color: #444;
+  color: white;
 }
 
+td button {
+  background-color: #111;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  border: none;
+}
+
+td button:hover {
+  background-color: #f44336;
+}
+
+
 </style>
+
