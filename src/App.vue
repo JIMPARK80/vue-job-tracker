@@ -32,16 +32,67 @@
         <tbody>
           <tr v-for="(app, index) in applications" :key="index">
             <td>{{ index + 1 }}</td>
-            <td>{{ app.company }}</td>
-            <td>{{ app.location }}</td>
-            <td>{{ app.position }}</td>
-            <td>{{ app.type }}</td>
-            <td>{{ app.date }}</td>
-            <td>{{ app.coverletter }}</td>
+            <!-- Company inline editable -->
+            <td @click="startEdit(index,'company')">
+              <template v-if="editing.row === index && editing.field === 'company'">
+                <input v-model="app.company" @blur="stopEdit" @keyup.enter="stopEdit" class="inline-input" />
+              </template>
+              <template v-else>
+                {{ app.company || '-' }}
+              </template>
+            </td>
+            <!-- Location inline editable -->
+            <td @click="startEdit(index,'location')">
+              <template v-if="editing.row === index && editing.field === 'location'">
+                <input v-model="app.location" @blur="stopEdit" @keyup.enter="stopEdit" class="inline-input" />
+              </template>
+              <template v-else>
+                {{ app.location || '-' }}
+              </template>
+            </td>
+            <!-- Position inline editable -->
+             <td @click="startEdit(index, 'position')">
+              <template v-if="editing.row === index && editing.field === 'postion'">
+                <input v-model="app.position" @blur="stopEdit" @keyup.enter="stopEdit" class="inline-input" />
+              </template>
+              <template v-else>
+                {{ app.position || '-' }}
+              </template>
+             </td>
+             
+             <!-- Employment Type inline editable -->
+             <td @click="startEdit(index, 'type')">
+              <template v-if="editing.row === index && editing.field === 'type'">
+                <input v-model="app.type" @blur="stopEdit" @keyup.enter="stopEdit" class="inline-input" />
+              </template>
+              <template v-else>
+                {{ app.type || '-' }}
+              </template>
+            </td>
+
+            <!-- Date inline editable -->
+            <td @click="startEdit(index, 'date')">
+              <template v-if="editing.row === index && editing.field === 'date'">
+                <input v-model="app.date" @blur="stopEdit" @keyup.enter="stopEdit" class="inline-input" />
+              </template>
+              <template v-else>
+                {{ app.date || '-' }}
+              </template>
+            </td>
+
+            <!-- Cover Letter inline editable -->
+            <td @click="startEdit(index, 'coverletter')">
+              <template v-if="editing.row === index && editing.field == 'coverletter'">
+                <input v-model="app.coverletter" @blur="stopEdit" @keyup.enter="stopEdit" class="inline-input" />
+              </template>
+              <template v-else>
+                {{ app.coverletter || '-' }}
+              </template>
+            </td>  
 
             <!-- Notes: inline editable -->
-            <td @click="startEdit(index)">
-              <template v-if="editingIndex === index">
+            <td @click="startEdit(index, 'notes')">
+              <template v-if="editing.row === index && editing.field === 'notes'">
                 <input v-model="app.notes" @blur="stopEdit" @keyup.enter="stopEdit" class="inline-input" />
               </template>
               <template v-else>
@@ -87,7 +138,7 @@ const form = ref({
 
 
 const applications = ref([]) // Create a reactive reference to an empty array
-const editingIndex = ref(null)
+const editing = ref({ row: null, field: null })
 
 // when the page loads, check if there is any saved data in local storage
 onMounted(() => {
@@ -120,12 +171,12 @@ function removeApplication(index) {
   applications.value.splice(index, 1)
 }
 
-function startEdit(index){
-  editingIndex.value = index
+function startEdit(row, field){
+  editing.value = { row, field }
 }
 
 function stopEdit() {
-  editingIndex.value = null
+  editing.value = { row: null, field: null }
 }
 </script>
 
@@ -188,17 +239,18 @@ table {
   max-width: 900px;
   margin: 0 auto;
   border-collapse: collapse;
-  background: rgb(172, 243, 234);
+  background: rgb(201, 243, 255);
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
   border-radius: 6px;
   overflow: hidden;
 }
 
 th, td {
-  padding: 14px;
-  font-size: 16px;
+  padding: 10px;
+  font-size: 18px;
   text-align: left;
-  border-bottom: 1px solid #000;
+  font-weight: bold;
+  border-bottom: 2px solid #000;
 }
 
 th {
