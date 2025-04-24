@@ -5,8 +5,11 @@
     <!-- Form to add a new application -->
     <form @submit.prevent="addApplication"> 
       <input v-model="form.company" placeholder="Company" required /> <!-- Company input field -->
+      <input v-model="form.location" placeholder="Location" required /> <!-- Location  input field -->
       <input v-model="form.position" placeholder="Position" required /> <!-- Position input field -->
+      <input v-model="form.type" placeholder="Employment Type" required /> <!-- Employment Type input field --> 
       <input v-model="form.date" type="date" required /> <!-- Date input field -->
+      <input v-model="form.coverletter" placeholder="Cover Letter Info (Yes/No)" />
       <textarea v-model="form.notes" placeholder="Notes..." rows="2"></textarea> <!-- Notes input field -->
       <button type="submit">Add</button> <!-- Add button -->
     </form>
@@ -15,18 +18,26 @@
       <table>
         <thead>
           <tr>
+            <th>#</th>
             <th>Company</th>
+            <th>Location</th>
             <th>Position</th>
+            <th>Employment Type</th>
             <th>Date</th>
+            <th>Cover Letter</th>
             <th>Notes</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(app, index) in applications" :key="index">
+            <td>{{ index + 1 }}</td>
             <td>{{ app.company }}</td>
+            <td>{{ app.location }}</td>
             <td>{{ app.position }}</td>
+            <td>{{ app.type }}</td>
             <td>{{ app.date }}</td>
+            <td>{{ app.coverletter }}</td>
             <td>{{ app.notes }}</td>
             <td>
               <button @click="removeApplication(index)">Delete</button>
@@ -57,6 +68,9 @@ const form = ref({
   // Initialize form fields with empty values
   company: '',
   position: '',
+  location: '',
+  type: '',
+  coverletter: '',
   date: '',
   notes: ''
 })
@@ -79,7 +93,15 @@ watch(applications, (newVal) => {
 // When user input data and click "Add" button, add the data to the applications array
 function addApplication() {
   applications.value.push({ ...form.value })
-  form.value = { company: '', position: '', date: '', notes: '' }
+  form.value = { 
+    company: '', 
+    position: '', 
+    location: '',
+    type: '',
+    coverletter: '',
+    date: '', 
+    notes: '' 
+  }
 }
 
 // When user remove an data from the list, remove the data
@@ -97,7 +119,7 @@ body {
   font-family: 'Segoe UI', sans-serif;
   padding: 40px;
   background-color: #01042c;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 h1 {
@@ -168,8 +190,8 @@ th {
 td button {
   background-color: #111;
   color: white;
-  padding: 6px 12px;
-  border-radius: 4px;
+  padding: 10px 10px;
+  border-radius: 5px;
   font-size: 14px;
   border: none;
 }
