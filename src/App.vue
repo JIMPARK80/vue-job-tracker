@@ -193,111 +193,158 @@ function toggleForm() {
 <style>
 /* minimum and clean default styles */
 
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    padding: 40px;
+    background-color: #01042c;
+    color: rgb(0, 0, 0);
+  }
+  
+  h1 {
+    color: rgb(172, 243, 234);
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+  }
+  
+  input, textarea {
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    background: #2e2e2e;
+    color: white;
+  }
+  
+  input::placeholder, textarea::placeholder {
+    color: #aaaaaa;
+  }
+  
+  button {
+    background: black;
+    color: white;
+    font-weight: bold;
+    border: 2px solid white;
+    padding: 10px;
+    border-radius: 6px;
+    transition: 0.2s;
+  }
+  
+  button:hover {
+    background: white;
+    color: black;
+  }
+  
+  table {
+    width: 100%;
+    max-width: 900px;
+    margin: 50px auto;
+    border-collapse: collapse;
+    background: rgb(201, 243, 255);
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  
+  th, td {
+    padding: 10px;
+    font-size: 10px;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 2px solid #000;
+  }
+  
+  th {
+    background-color: #444;
+    color: white;
+  }
+  
+  td button {
+    background-color: #111;
+    color: white;
+    padding: 10px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    border: none;
+  }
+  
+  td button:hover {
+    background-color: #f44336;
+  }
+  
+  .inline-input {
+    width: 100%;
+    padding: 6px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+  }
+  
+  .new-button{
+    background:rgb(172, 243, 234);
+    border: none;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+  }
 
-body {
-  font-family: 'Segoe UI', sans-serif;
-  padding: 40px;
-  background-color: #01042c;
-  color: rgb(0, 0, 0);
+  @media (max-width: 768px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tr {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #e1faff;
+    padding: 10px;
+  }
+
+  td {
+    position: relative;
+    padding-left: 50%;
+    text-align: left;
+    border-bottom: none;
+    font-size: 14px;
+  }
+
+  td::before {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-weight: bold;
+    color: #444;
+    white-space: nowrap;
+  }
+
+  td:nth-of-type(1)::before { content: "#"; }
+  td:nth-of-type(2)::before { content: "Company"; }
+  td:nth-of-type(3)::before { content: "Location"; }
+  td:nth-of-type(4)::before { content: "Position"; }
+  td:nth-of-type(5)::before { content: "Employment Type"; }
+  td:nth-of-type(6)::before { content: "Date"; }
+  td:nth-of-type(7)::before { content: "Cover Letter"; }
+  td:nth-of-type(8)::before { content: "Notes"; }
+  td:nth-of-type(9)::before { content: "Action"; }
 }
 
-h1 {
-  color: rgb(172, 243, 234);
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  max-width: 600px;
-  margin: 0 auto 40px auto;
-}
-
-input, textarea {
-  padding: 12px;
-  font-size: 16px;
-  border: none;
-  border-radius: 6px;
-  background: #2e2e2e;
-  color: white;
-}
-
-input::placeholder, textarea::placeholder {
-  color: #aaaaaa;
-}
-
-button {
-  background: black;
-  color: white;
-  font-weight: bold;
-  border: 2px solid white;
-  padding: 10px;
-  border-radius: 6px;
-  transition: 0.2s;
-}
-
-button:hover {
-  background: white;
-  color: black;
-}
-
-table {
-  width: 100%;
-  max-width: 900px;
-  margin: 50px auto;
-  border-collapse: collapse;
-  background: rgb(201, 243, 255);
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-th, td {
-  padding: 10px;
-  font-size: 18px;
-  text-align: left;
-  font-weight: bold;
-  border-bottom: 2px solid #000;
-}
-
-th {
-  background-color: #444;
-  color: white;
-}
-
-td button {
-  background-color: #111;
-  color: white;
-  padding: 10px 10px;
-  border-radius: 5px;
-  font-size: 14px;
-  border: none;
-}
-
-td button:hover {
-  background-color: #f44336;
-}
-
-.inline-input {
-  width: 100%;
-  padding: 6px;
-  font-size: 14px;
-  border: none;
-  border-radius: 4px;
-}
-
-.new-button{
-  background:rgb(172, 243, 234);
-  border: none;
-  color: rgb(0, 0, 0);
-  font-weight: bold;
-  border-radius: 6px;
-  padding: 10px;
-  font-size: 16px;
-  cursor: pointer;
-}
 
 </style>
 
