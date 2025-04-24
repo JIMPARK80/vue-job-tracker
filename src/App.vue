@@ -38,7 +38,17 @@
             <td>{{ app.type }}</td>
             <td>{{ app.date }}</td>
             <td>{{ app.coverletter }}</td>
-            <td>{{ app.notes }}</td>
+
+            <!-- Notes: inline editable -->
+            <td @click="startEdit(index)">
+              <template v-if="editingIndex === index">
+                <input v-model="app.notes" @blur="stopEdit" @keyup.enter="stopEdit" class="inline-input" />
+              </template>
+              <template v-else>
+                {{ app.notes || '-' }}
+              </template>
+            </td>
+
             <td>
               <button @click="removeApplication(index)">Delete</button>
             </td>
@@ -77,6 +87,7 @@ const form = ref({
 
 
 const applications = ref([]) // Create a reactive reference to an empty array
+const editingIndex = ref(null)
 
 // when the page loads, check if there is any saved data in local storage
 onMounted(() => {
@@ -108,6 +119,14 @@ function addApplication() {
 function removeApplication(index) {
   applications.value.splice(index, 1)
 }
+
+function startEdit(index){
+  editingIndex.value = index
+}
+
+function stopEdit() {
+  editingIndex.value = null
+}
 </script>
 
 
@@ -123,7 +142,7 @@ body {
 }
 
 h1 {
-  color: #acf3ea;
+  color: rgb(172, 243, 234);
   text-align: center;
   margin-bottom: 30px;
 }
@@ -169,7 +188,7 @@ table {
   max-width: 900px;
   margin: 0 auto;
   border-collapse: collapse;
-  background: #2bb5c7;
+  background: rgb(172, 243, 234);
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
   border-radius: 6px;
   overflow: hidden;
@@ -200,6 +219,12 @@ td button:hover {
   background-color: #f44336;
 }
 
-
+.inline-input {
+  width: 100%;
+  padding: 6px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+}
 </style>
 

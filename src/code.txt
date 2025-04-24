@@ -123,3 +123,58 @@ if i analyze the entire code above, it is as follows.
                ┌────────────────────┐
                │ Page shows them!   │
                └────────────────────┘
+
+
+
+
+==============================================================
+23 April / 2025
+
+Job Application Tracker – Flow Map
+
+[User input]
+     ↓
++-----------------------------+
+|        Input Form (Form)       |
+|-----------------------------|
+| 1. Company                  |
+| 2. Location                 |
+| 3. Position                 |
+| 4. Employment Type          |
+| 5. Date                     |
+| 6. Cover Letter (Yes/No)    |
+| 7. Notes                    |
++-----------------------------+
+     ↓   (When button click, @submit.prevent → addApplication())
+     
+[form.value → pushed to applications array]
+     ↓
+[applications array updates]
+     ↓
+[watch saves to localStorage automatically]
+     ↓
++-----------------------------+
+|       Table Render          |
++-----------------------------+
+| # | Company | ... | Notes | Action |
+|---|---------|-----|-------|--------|
+| 1 | Google  | ... | memo  | Delete |
++-----------------------------+
+
+Notes cell clicked
+     ↓
+[editingIndex updated → cell becomes <input>]
+     ↓
+[User types and presses blur or Enter]
+     ↓
+[app.notes updated -> localStorage updated via watch]
+
+
+When Reloading the Page
+[onMounted]
+     ↓
+[Load from localStorage -> JSON.parse]
+     ↓
+[application.value = saved data]
+     ↓
+[Table renders automatically]
