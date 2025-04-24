@@ -2,7 +2,7 @@
   <div>
     <h1>Job Application Tracker</h1> <!-- Title of the page -->
 
-    <button @click="toggleForm">
+    <button @click="toggleForm" class="new-button">
       {{ showForm ? 'Hide Form' : 'New Application' }}
     </button>
 
@@ -246,7 +246,7 @@ button:hover {
 table {
   width: 100%;
   max-width: 900px;
-  margin: 0 auto;
+  margin: 50px auto;
   border-collapse: collapse;
   background: rgb(201, 243, 255);
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
@@ -287,5 +287,17 @@ td button:hover {
   border: none;
   border-radius: 4px;
 }
+
+.new-button{
+  background:rgb(172, 243, 234);
+  border: none;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
 </style>
 
