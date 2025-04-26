@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-container">
     <h1>Job Application Tracker</h1> <!-- Title of the page -->
 
     <button @click="toggleForm" class="new-button">
@@ -192,114 +192,122 @@ function toggleForm() {
 
 <style>
 /* minimum and clean default styles */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* 가로 중앙 */
+  justify-content: flex-start; /* 세로 상단 */
+  background: #01042c;
+}
 
-  
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    padding: 40px;
-    background-color: #01042c;
-    color: rgb(0, 0, 0);
-  }
-  
-  h1 {
-    color: rgb(172, 243, 234);
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    max-width: 600px;
-    margin: 0 auto 40px auto;
-  }
-  
-  input, textarea {
-    padding: 12px;
-    font-size: 16px;
-    border: none;
-    border-radius: 6px;
-    background: #2e2e2e;
-    color: white;
-  }
-  
-  input::placeholder, textarea::placeholder {
-    color: #aaaaaa;
-  }
-  
-  button {
-    background: black;
-    color: white;
-    font-weight: bold;
-    border: 2px solid white;
-    padding: 10px;
-    border-radius: 6px;
-    transition: 0.2s;
-  }
-  
-  button:hover {
-    background: white;
-    color: black;
-  }
-  
-  table {
-    width: 100%;
-    max-width: 900px;
-    margin: 50px auto;
-    border-collapse: collapse;
-    background: rgb(201, 243, 255);
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    border-radius: 6px;
-    overflow: hidden;
-  }
-  
-  th, td {
-    padding: 10px;
-    font-size: 10px;
-    text-align: left;
-    font-weight: bold;
-    border-bottom: 2px solid #000;
-  }
-  
-  th {
-    background-color: #444;
-    color: white;
-  }
-  
-  td button {
-    background-color: #111;
-    color: white;
-    padding: 10px 10px;
-    border-radius: 5px;
-    font-size: 14px;
-    border: none;
-  }
-  
-  td button:hover {
-    background-color: #f44336;
-  }
-  
-  .inline-input {
-    width: 100%;
-    padding: 6px;
-    font-size: 14px;
-    border: none;
-    border-radius: 4px;
-  }
-  
-  .new-button{
-    background:rgb(172, 243, 234);
-    border: none;
-    color: rgb(0, 0, 0);
-    font-weight: bold;
-    border-radius: 6px;
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-  }
+body {
+  font-family: 'Segoe UI', sans-serif;
+  padding: 40px;
+  background-color: #01042c;
+  color: rgb(0, 0, 0);
+}
 
-  @media (max-width: 768px) {
+h1 {
+  color: rgb(172, 243, 234);
+  text-align: center;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 600px;
+  margin: 0 auto 40px auto;
+}
+
+input, textarea {
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  background: #2e2e2e;
+  color: white;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #aaaaaa;
+}
+
+button {
+  background: black;
+  color: white;
+  font-weight: bold;
+  border: 2px solid white;
+  padding: 10px;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: white;
+  color: black;
+}
+
+table {
+  width: 100%;
+  max-width: 900px;
+  margin: 50px auto;
+  border-collapse: collapse;
+  background: rgb(201, 243, 255);
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 10px;
+  font-size: 15px;
+  text-align: left;
+  font-weight: bold;
+  border-bottom: 2px solid #000;
+}
+
+th {
+  background-color: #444;
+  color: white;
+}
+
+td button {
+  background-color: #111;
+  color: white;
+  padding: 10px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  border: none;
+}
+
+td button:hover {
+  background-color: #f44336;
+}
+
+.inline-input {
+  width: 100%;
+  padding: 6px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+}
+
+.new-button{
+  background:rgb(172, 243, 234);
+  border: none;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
   table, thead, tbody, th, td, tr {
     display: block;
   }
