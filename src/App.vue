@@ -332,7 +332,7 @@ td button:hover {
   cursor: pointer;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 576px) {
   table, thead, tbody, th, td, tr {
     display: block;
     width: 100%;
