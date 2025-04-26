@@ -7,12 +7,29 @@
     </button>
 
     <form @submit.prevent="addApplication" v-if="showForm" class="application-form">
+      <label class="input-label">Company</label>
       <input v-model="form.company" placeholder="Company" required />
+
+      <label class="input-label">Location</label>
       <input v-model="form.location" placeholder="Location" required />
+
+      <label class="input-label">Position</label>
       <input v-model="form.position" placeholder="Position" required />
+
+      <label class="input-label"> Employment Type</label>
       <input v-model="form.type" placeholder="Employment Type" required />
+
+      <label class="input-label">Application Date</label>
       <input v-model="form.date" type="date" required />
-      <input v-model="form.coverletter" placeholder="Cover Letter Info (Yes/No)" />
+
+      <label class="input-label">Cover Letter</label>
+      <select v-model="form.coverletter" required>
+        <option disabled value="">Cover Letter?</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+
+      <label class="input-label">Notes</label>
       <textarea v-model="form.notes" placeholder="Notes..." rows="2"></textarea>
       <button type="submit">Add</button>
     </form>
@@ -133,18 +150,25 @@ h1 {
   height: 10px;
   border-radius: 8px;
   border: none;
-  background: #2e2e2e;
-  color: white;
+  background: #c0c0c0;
+  color: rgb(0, 0, 0);
 }
 
 .application-form input[type="date"] {
   padding: 12px;
-  height: 20px;
+  height: 30px;
   border-radius: 8px;
-  font-size: 14px;
   border: none;
-  color: white;
+  background: #c0c0c0;
+  color: rgb(0, 0, 0);
+}
+
+.application-form select {
+  padding: 12px;
   border-radius: 8px;
+  border: none;
+  background: #c0c0c0;
+  color: rgb(0, 0, 0);
 }
 
 .cards-container {
