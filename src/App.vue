@@ -139,7 +139,7 @@ h1 {
 
 .application-form input[type="date"] {
   padding: 12px;
-  height: 10px;
+  height: 20px;
   border-radius: 8px;
   font-size: 14px;
   border: none;
