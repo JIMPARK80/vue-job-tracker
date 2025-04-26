@@ -36,18 +36,18 @@
         </thead>
         <tbody>
           <tr v-for="(app, index) in applications" :key="index">
-            <td data-label="#">{{ index + 1 }}</td>
+            <td data-label="Application #">{{ index + 1 }}</td>
             <!-- Company inline editable -->
-            <td data-label="Company" @click="startEdit(index,'company')">
+            <td data-label="Comp." @click="startEdit(index,'company')">
               <template v-if="editing.row === index && editing.field === 'company'">
                 <input v-model="app.company" @blur="stopEdit" @keyup.enter="stopEdit" class="inline-input" />
-              </template>
+              </template> 
               <template v-else>
                 {{ app.company || '-' }}
               </template>
             </td>
             <!-- Location inline editable -->
-            <td data-label="Location" @click="startEdit(index,'location')">
+            <td data-label="Loc." @click="startEdit(index,'location')">
               <template v-if="editing.row === index && editing.field === 'location'">
                 <input v-model="app.location" @blur="stopEdit" @keyup.enter="stopEdit" class="inline-input" />
               </template>
@@ -56,7 +56,7 @@
               </template>
             </td>
             <!-- Position inline editable -->
-             <td data-label="Position" @click="startEdit(index, 'position')">
+             <td data-label="Pos." @click="startEdit(index, 'position')">
               <template v-if="editing.row === index && editing.field === 'position'">
                 <input v-model="app.position" @blur="stopEdit" @keyup.enter="stopEdit" class="inline-input" />
               </template>
@@ -66,7 +66,7 @@
              </td>
              
              <!-- Employment Type inline editable -->
-             <td data-label="Employment Type" @click="startEdit(index, 'type')">
+             <td data-label="Emp. Type" @click="startEdit(index, 'type')">
               <template v-if="editing.row === index && editing.field === 'type'">
                 <input v-model="app.type" @blur="stopEdit" @keyup.enter="stopEdit" class="inline-input" />
               </template>
@@ -86,7 +86,7 @@
             </td>
 
             <!-- Cover Letter inline editable -->
-            <td data-label="Cover Letter" @click="startEdit(index, 'coverletter')">
+            <td data-label="Cvr. Letter" @click="startEdit(index, 'coverletter')">
               <template v-if="editing.row === index && editing.field == 'coverletter'">
                 <input v-model="app.coverletter" @blur="stopEdit" @keyup.enter="stopEdit" class="inline-input" />
               </template>
@@ -106,7 +106,7 @@
             </td>
 
             <!-- Match Score: inline editable -->
-             <td>
+             <td data-label="M.Score">
                 {{ app.matchScore !== undefined && app.matchScore !== '' ? app.matchScore + '%' : '-' }}
              </td>
 
