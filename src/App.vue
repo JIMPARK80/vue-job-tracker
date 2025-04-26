@@ -26,10 +26,11 @@
             <th>Company</th>
             <th>Location</th>
             <th>Position</th>
-            <th>Employment Type</th>
+            <th>Type</th>
             <th>Date</th>
             <th>Cover Letter</th>
             <th>Notes</th>
+            <th>Match Score (Updating)</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -104,6 +105,11 @@
               </template>
             </td>
 
+            <!-- Match Score: inline editable -->
+             <td>
+                {{ app.matchScore !== undefined && app.matchScore !== '' ? app.matchScore + '%' : '-' }}
+             </td>
+
             <td>
               <button @click="removeApplication(index)">Delete</button>
             </td>
@@ -137,7 +143,8 @@ const form = ref({
   type: '',
   coverletter: '',
   date: '',
-  notes: ''
+  notes: '',
+  matchScore: '',
 })
 
 
@@ -148,7 +155,20 @@ const showForm = ref(false) // Add this line to control form visibility
 // when the page loads, check if there is any saved data in local storage
 onMounted(() => {
   const saved = localStorage.getItem('applications')
-  if (saved) applications.value = JSON.parse(saved)
+  if (saved) {
+      applications.value = JSON.parse(saved)
+      let updated = false
+      // Addtionaly, add a match score to the application
+      applications.value.forEach(app => {
+        if (app.matchScore === undefined || app.matchScore === ""){
+          app.matchScore = Math.floor(Math.random() * 31) + 70 
+          updated = true
+        }
+      })
+      if (updated) {
+        localStorage.setItem('applications', JSON.stringify(applications.value))
+      }
+  }
 })
 
 // if user add or remove an application, save the data to local storage (keep the data)
@@ -159,7 +179,8 @@ watch(applications, (newVal) => {
 
 // When user input data and click "Add" button, add the data to the applications array
 function addApplication() {
-  applications.value.push({ ...form.value })
+  const randomScore = Math.floor(Math.random() * 31) + 70
+  applications.value.push({ ...form.value, matchScore: randomScore })
   form.value = { 
     company: '', 
     position: '', 
@@ -167,7 +188,8 @@ function addApplication() {
     type: '',
     coverletter: '',
     date: '', 
-    notes: '' 
+    notes: '',
+    matchScore: '',
   }
 }
 
@@ -196,8 +218,8 @@ function toggleForm() {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;      /* 가로 중앙 */
-  justify-content: flex-start; /* 세로 상단 */
+  align-items: center;      /* horizontal center */
+  justify-content: flex-start; /* vertical top */
   background: #01042c;
 }
 
@@ -220,14 +242,15 @@ form {
   flex-direction: column;
   gap: 12px;
   max-width: 600px;
+  width: 100%;
   margin: 0 auto 40px auto;
 }
 
 input, textarea {
-  padding: 12px;
+  padding: 15px;
   font-size: 16px;
   border: none;
-  border-radius: 6px;
+  border-radius: 10px;
   background: #2e2e2e;
   color: white;
 }
@@ -263,16 +286,18 @@ table {
 }
 
 th, td {
-  padding: 10px;
+  padding: 14px;
   font-size: 15px;
-  text-align: left;
-  font-weight: bold;
-  border-bottom: 2px solid #000;
+  text-align: center;
+  border-left: 1px solid #2b2b2b;
+  line-height: 1.7;
+  vertical-align: top;
 }
 
 th {
   background-color: #444;
   color: white;
+  min-width: 20px;
 }
 
 td button {
@@ -308,6 +333,7 @@ td button:hover {
 }
 
 @media (max-width: 768px) {
+  /* This part is applied only to mobile */
   table, thead, tbody, th, td, tr {
     display: block;
   }
@@ -352,6 +378,7 @@ td button:hover {
   td:nth-of-type(8)::before { content: "Notes"; }
   td:nth-of-type(9)::before { content: "Action"; }
 }
+
 
 
 </style>
