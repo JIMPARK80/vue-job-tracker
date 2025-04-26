@@ -334,52 +334,22 @@ td button:hover {
 
 @media (max-width: 768px) {
   /* This part is applied only to mobile */
-  table, thead, tbody, th, td, tr {
-    display: block;
-  }
 
-  thead {
-    display: none;
-  }
-
-  tr {
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background: #e1faff;
-    padding: 10px;
-  }
-
-  td {
-    position: relative;
-    padding-left: 50%;
-    text-align: left;
-    border-bottom: none;
-    font-size: 14px;
-  }
-
-  td::before {
-    position: absolute;
-    top: 50%;
-    left: 10px;
-    transform: translateY(-50%);
-    font-weight: bold;
-    color: #444;
-    white-space: nowrap;
-  }
-
-  td:nth-of-type(1)::before { content: "#"; }
-  td:nth-of-type(2)::before { content: "Company"; }
-  td:nth-of-type(3)::before { content: "Location"; }
-  td:nth-of-type(4)::before { content: "Position"; }
-  td:nth-of-type(5)::before { content: "Employment Type"; }
-  td:nth-of-type(6)::before { content: "Date"; }
-  td:nth-of-type(7)::before { content: "Cover Letter"; }
-  td:nth-of-type(8)::before { content: "Notes"; }
-  td:nth-of-type(9)::before { content: "Action"; }
+table {
+  width: 100%;
+  font-size: 13px;
 }
 
+th, td {
+  padding: 8px;
+  font-size: 13px;
+  text-align: center;
+}
 
+.new-button {
+  width: 90%;
+  font-size: 14px;
+}}
 
 </style>
 
