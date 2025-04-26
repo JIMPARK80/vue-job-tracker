@@ -36,9 +36,9 @@
         </thead>
         <tbody>
           <tr v-for="(app, index) in applications" :key="index">
-            <td>{{ index + 1 }}</td>
+            <td data-label="#">{{ index + 1 }}</td>
             <!-- Company inline editable -->
-            <td @click="startEdit(index,'company')">
+            <td data-label="Company" @click="startEdit(index,'company')">
               <template v-if="editing.row === index && editing.field === 'company'">
                 <input v-model="app.company" @blur="stopEdit" @keyup.enter="stopEdit" class="inline-input" />
               </template>
@@ -47,7 +47,7 @@
               </template>
             </td>
             <!-- Location inline editable -->
-            <td @click="startEdit(index,'location')">
+            <td data-label="Location" @click="startEdit(index,'location')">
               <template v-if="editing.row === index && editing.field === 'location'">
                 <input v-model="app.location" @blur="stopEdit" @keyup.enter="stopEdit" class="inline-input" />
               </template>
@@ -56,7 +56,7 @@
               </template>
             </td>
             <!-- Position inline editable -->
-             <td @click="startEdit(index, 'position')">
+             <td data-label="Position" @click="startEdit(index, 'position')">
               <template v-if="editing.row === index && editing.field === 'position'">
                 <input v-model="app.position" @blur="stopEdit" @keyup.enter="stopEdit" class="inline-input" />
               </template>
@@ -66,7 +66,7 @@
              </td>
              
              <!-- Employment Type inline editable -->
-             <td @click="startEdit(index, 'type')">
+             <td data-label="Employment Type" @click="startEdit(index, 'type')">
               <template v-if="editing.row === index && editing.field === 'type'">
                 <input v-model="app.type" @blur="stopEdit" @keyup.enter="stopEdit" class="inline-input" />
               </template>
@@ -76,7 +76,7 @@
             </td>
 
             <!-- Date inline editable -->
-            <td @click="startEdit(index, 'date')">
+            <td data-label="Date" @click="startEdit(index, 'date')">
               <template v-if="editing.row === index && editing.field === 'date'">
                 <input v-model="app.date" @blur="stopEdit" @keyup.enter="stopEdit" class="inline-input" />
               </template>
@@ -86,7 +86,7 @@
             </td>
 
             <!-- Cover Letter inline editable -->
-            <td @click="startEdit(index, 'coverletter')">
+            <td data-label="Cover Letter" @click="startEdit(index, 'coverletter')">
               <template v-if="editing.row === index && editing.field == 'coverletter'">
                 <input v-model="app.coverletter" @blur="stopEdit" @keyup.enter="stopEdit" class="inline-input" />
               </template>
@@ -96,7 +96,7 @@
             </td>  
 
             <!-- Notes: inline editable -->
-            <td @click="startEdit(index, 'notes')">
+            <td data-label="Notes" @click="startEdit(index, 'notes')">
               <template v-if="editing.row === index && editing.field === 'notes'">
                 <input v-model="app.notes" @blur="stopEdit" @keyup.enter="stopEdit" class="inline-input" />
               </template>
@@ -333,28 +333,44 @@ td button:hover {
 }
 
 @media (max-width: 768px) {
-  /* This part is applied only to mobile */
+  table, thead, tbody, th, td, tr {
+    display: block;
+    width: 100%;
+  }
 
-table {
-  width: 100%;
-  font-size: 13px;
+  thead {
+    display: none;
+  }
+
+  tr {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #e1faff;
+    padding: 10px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  }
+
+  td {
+    position: relative;
+    padding: 12px 10px 12px 120px;
+    text-align: left;
+    font-size: 14px;
+    border: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    top: 12px;
+    left: 10px;
+    font-weight: bold;
+    color: #333;
+    font-size: 13px;
+    white-space: nowrap;
+  }
 }
-
-th, td {
-  padding: 8px;
-  font-size: 13px;
-  text-align: center;
-}
-
-.table-wrapper{
-  width: 100%;
-  overflow-x: auto;
-}
-
-.new-button {
-  width: 90%;
-  font-size: 14px;
-}}
 
 </style>
 
