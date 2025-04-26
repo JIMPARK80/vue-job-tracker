@@ -19,7 +19,7 @@
 
     <div v-if="applications.length" class="cards-container">
       <div v-for="(app, index) in applications" :key="index" class="card">
-        <div class="application-numver">Application #{{ index + 1 }}</div>
+        <div class="application-number-badge">Application #{{ index + 1 }}</div>
         <div class="row-with-divider">
           <div class="field"><strong>Comp:</strong> {{ app.company || '-' }}</div>
           <div class="divider"></div>
@@ -130,10 +130,21 @@ h1 {
 .application-form input,
 .application-form textarea {
   padding: 12px;
+  height: 10px;
   border-radius: 8px;
   border: none;
   background: #2e2e2e;
   color: white;
+}
+
+.application-form input[type="date"] {
+  padding: 12px;
+  height: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  border: none;
+  color: white;
+  border-radius: 8px;
 }
 
 .cards-container {
@@ -192,4 +203,13 @@ h1 {
 .card button:hover {
   background: #f44336;
 }
+
+.application-number-badge {
+  background: #578f7e;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+
 </style>
