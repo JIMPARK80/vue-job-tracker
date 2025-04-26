@@ -20,7 +20,7 @@
       <input v-model="form.type" placeholder="Employment Type" required />
 
       <label class="input-label">Application Date</label>
-      <input v-model="form.date" type="date" required />
+      <Datepicker v-model="form.date" :format="formatDate" placeholder="Select Application Date" />
 
       <label class="input-label">Cover Letter</label>
       <select v-model="form.coverletter" required>
@@ -66,6 +66,7 @@
 
 <script setup>
 import { ref, watch, onMounted } from 'vue'
+import Datepicker from 'vue3-datepicker'
 
 const form = ref({ company: '', position: '', location: '', type: '', coverletter: '', date: '', notes: '', matchScore: '' })
 const applications = ref([])
@@ -106,6 +107,15 @@ function removeApplication(index) {
 function toggleForm() {
   showForm.value = !showForm.value
 }
+
+function formatDate(date) {
+  if (!date) return ''
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
 </script>
 
 <style>
@@ -133,6 +143,10 @@ h1 {
   border-radius: 8px;
   margin-bottom: 30px;
   cursor: pointer;
+}
+
+.new-button:hover {
+  background: #0099cc;
 }
 
 .application-form {
@@ -169,6 +183,20 @@ h1 {
   border: none;
   background: #c0c0c0;
   color: rgb(0, 0, 0);
+}
+
+.application-form button {
+  background: rgb(172, 243, 234);
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.application-form button:hover {
+  background: #0099cc;
 }
 
 .cards-container {
