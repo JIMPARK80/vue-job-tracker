@@ -6,7 +6,6 @@
       {{ showForm ? 'Hide Form' : 'New Application' }}
     </button>
 
-    <!-- Form -->
     <form @submit.prevent="addApplication" v-if="showForm" class="application-form">
       <input v-model="form.company" placeholder="Company" required />
       <input v-model="form.location" placeholder="Location" required />
@@ -18,18 +17,26 @@
       <button type="submit">Add</button>
     </form>
 
-    <!-- Cards -->
     <div v-if="applications.length" class="cards-container">
       <div v-for="(app, index) in applications" :key="index" class="card">
-        <p><strong>#{{ index + 1 }}</strong></p>
-        <p><strong>Company:</strong> {{ app.company || '-' }}</p>
-        <p><strong>Location:</strong> {{ app.location || '-' }}</p>
-        <p><strong>Position:</strong> {{ app.position || '-' }}</p>
-        <p><strong>Type:</strong> {{ app.type || '-' }}</p>
-        <p><strong>Date:</strong> {{ app.date || '-' }}</p>
-        <p><strong>Cover Letter:</strong> {{ app.coverletter || '-' }}</p>
-        <p><strong>Notes:</strong> {{ app.notes || '-' }}</p>
-        <p><strong>Match Score:</strong> {{ app.matchScore !== undefined && app.matchScore !== '' ? app.matchScore + '%' : '-' }}</p>
+        <div class="application-numver">Application #{{ index + 1 }}</div>
+        <div class="row-with-divider">
+          <div class="field"><strong>Comp:</strong> {{ app.company || '-' }}</div>
+          <div class="divider"></div>
+          <div class="field"><strong>Loc:</strong> {{ app.location || '-' }}</div>
+        </div>
+        <div class="row-with-divider">
+          <div class="field"><strong>Pos:</strong> {{ app.position || '-' }}</div>
+          <div class="divider"></div>
+          <div class="field"><strong>Type:</strong> {{ app.type || '-' }}</div>
+        </div>
+        <div class="row-with-divider">
+          <div class="field"><strong>Date:</strong> {{ app.date || '-' }}</div>
+          <div class="divider"></div>
+          <div class="field"><strong>CVL:</strong> {{ app.coverletter || '-' }}</div>
+        </div>
+        <div class="full-row"><strong>Notes:</strong> {{ app.notes || '-' }}</div>
+        <div class="full-row"><strong>Score:</strong> {{ app.matchScore !== undefined && app.matchScore !== '' ? app.matchScore + '%' : '-' }}</div>
         <button @click="removeApplication(index)">Delete</button>
       </div>
     </div>
@@ -43,9 +50,7 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue'
 
-const form = ref({
-  company: '', position: '', location: '', type: '', coverletter: '', date: '', notes: '', matchScore: ''
-})
+const form = ref({ company: '', position: '', location: '', type: '', coverletter: '', date: '', notes: '', matchScore: '' })
 const applications = ref([])
 const editing = ref({ row: null, field: null })
 const showForm = ref(false)
@@ -85,7 +90,6 @@ function toggleForm() {
   showForm.value = !showForm.value
 }
 </script>
-
 
 <style>
 .app-container {
@@ -146,21 +150,37 @@ h1 {
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  width: 280px;
+  width: 320px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   text-align: left;
-  transition: 0.3s;
 }
 
-.card:hover {
-  transform: translateY(-5px);
+.row-with-divider {
+  display: flex;
+  align-items: center;
+}
+
+.field {
+  width: 48%;
+  font-size: 14px;
+}
+
+.divider {
+  width: 1px;
+  height: 20px;
+  background-color: #ccc;
+  margin: 0 5px;
+}
+
+.full-row {
+  font-size: 14px;
 }
 
 .card button {
   align-self: flex-end;
-  margin-top: auto;
+  margin-top: 10px;
   background: #111;
   color: white;
   border: none;
@@ -173,5 +193,3 @@ h1 {
   background: #f44336;
 }
 </style>
-
-
