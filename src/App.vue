@@ -346,6 +346,11 @@ th, td {
   text-align: center;
 }
 
+.table-wrapper{
+  width: 100%;
+  overflow-x: auto;
+}
+
 .new-button {
   width: 90%;
   font-size: 14px;
