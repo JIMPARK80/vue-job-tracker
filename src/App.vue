@@ -6,22 +6,29 @@
       {{ showForm ? (editMode ? 'Cancel Edit' : 'Hide Form') : 'New Application' }}
     </button>
 
+    <!--input inforamtion form -->
     <form @submit.prevent="addApplication" v-if="showForm" class="application-form">
+      <!--input Company -->
       <label class="input-label">Company</label>
       <input v-model="form.company" placeholder="Company" required />
 
+      <!--input Location -->
       <label class="input-label">Location</label>
       <input v-model="form.location" placeholder="Location" required />
 
+      <!--input Position -->
       <label class="input-label">Position</label>
       <input v-model="form.position" placeholder="Position" required />
 
+      <!--input Employment Type -->
       <label class="input-label">Employment Type</label>
       <input v-model="form.type" placeholder="Employment Type" required />
 
+      <!--input Application Date -->
       <label class="input-label">Application Date</label>
       <Datepicker v-model="form.date" :format="formatDate" placeholder="Select Application Date" />
 
+      <!--input Cover Letter -->
       <label class="input-label">Cover Letter</label>
       <select v-model="form.coverletter" required>
         <option disabled value="">Cover Letter?</option>
@@ -29,34 +36,59 @@
         <option value="no">No</option>
       </select>
 
+      <!--input status -->
+      <label class="input-label">Status</label>
+      <select v-model="form.status" >
+        <option disabled value="">Status</option>
+        <option value="applied">Applied</option>
+        <option value="interview">Interview</option>
+        <option value="offer">Offer</option>
+        <option value="rejected">Rejected</option>
+      </select>
+      <!--input Notes -->
       <label class="input-label">Notes</label>
       <textarea v-model="form.notes" placeholder="Notes..." rows="2"></textarea>
 
       <button type="submit">{{ editMode ? 'Save Changes' : 'Add' }}</button>
     </form>
 
+    <!--display applications cards-->
     <div v-if="applications.length" class="cards-container">
       <div v-for="(app, index) in applications" :key="index" class="card">
         <div class="application-number-badge">Application #{{ index + 1 }}</div>
 
+        <!--display company and location -->
         <div class="row-with-divider">
           <div class="field"><strong>Company:</strong> {{ app.company || '-' }}</div>
           <div class="divider"></div>
           <div class="field"><strong>Location:</strong> {{ app.location || '-' }}</div>
         </div>
+
+        <!--display position -->
         <div class="row-with-divider">
           <div class="field"><strong>Position:</strong> {{ app.position || '-' }}</div>
           <div class="divider"></div>
           <div class="field"><strong>JobType:</strong> {{ app.type || '-' }}</div>
         </div>
+
+        <!--display date -->
         <div class="row-with-divider">
           <div class="field"><strong>Date:</strong> {{ app.date ? formatDate(new Date(app.date)) : '-' }}</div>
           <div class="divider"></div>
           <div class="field"><strong>CV Letter:</strong> {{ app.coverletter || '-' }}</div>
         </div>
+
+
+        <!--display status -->
+        <div class="row-with-divider">
+          <div class="field"><strong>Status:</strong> {{ app.status || '-' }}</div>
+        </div>
+
+        <!--display notes -->
         <div class="full-row"><strong>Notes:</strong> {{ app.notes || '-' }}</div>
         <div class="full-row"><strong>Match Score:</strong> {{ app.matchScore !== undefined && app.matchScore !== '' ? app.matchScore + '%' : '-' }}</div>
 
+        <!--display buttons -->
         <div class="button-group">
           <button class="edit-btn" @click="editApplication(index)">Edit</button>
           <button class="delete-btn" @click="removeApplication(index)">Delete</button>
@@ -120,7 +152,7 @@ function removeApplication(index) {
 
 function editApplication(index) {
   const app = applications.value[index]
-  form.value = { ...app, date: app.date ? new Date(app.date) : '' }
+  form.value = { ...app, date: app.date ? new Date(app.date) : '', status: (app.Status) || '' }
   editMode.value = true
   editIndex.value = index
   showForm.value = true
