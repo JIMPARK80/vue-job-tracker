@@ -3,7 +3,7 @@
     <h1>Job Application Tracker</h1>
 
     <button @click="toggleForm" class="new-button">
-      {{ showForm ? 'Hide Form' : 'New Application' }}
+      {{ showForm ? (editMode ? 'Cancel Edit' : 'Hide Form') : 'New Application' }}
     </button>
 
     <form @submit.prevent="addApplication" v-if="showForm" class="application-form">
@@ -16,7 +16,7 @@
       <label class="input-label">Position</label>
       <input v-model="form.position" placeholder="Position" required />
 
-      <label class="input-label"> Employment Type</label>
+      <label class="input-label">Employment Type</label>
       <input v-model="form.type" placeholder="Employment Type" required />
 
       <label class="input-label">Application Date</label>
@@ -31,12 +31,14 @@
 
       <label class="input-label">Notes</label>
       <textarea v-model="form.notes" placeholder="Notes..." rows="2"></textarea>
-      <button type="submit">Add</button>
+
+      <button type="submit">{{ editMode ? 'Save Changes' : 'Add' }}</button>
     </form>
 
     <div v-if="applications.length" class="cards-container">
       <div v-for="(app, index) in applications" :key="index" class="card">
         <div class="application-number-badge">Application #{{ index + 1 }}</div>
+
         <div class="row-with-divider">
           <div class="field"><strong>Company:</strong> {{ app.company || '-' }}</div>
           <div class="divider"></div>
@@ -48,13 +50,17 @@
           <div class="field"><strong>JobType:</strong> {{ app.type || '-' }}</div>
         </div>
         <div class="row-with-divider">
-          <div class="field"><strong>Date:</strong> {{ app.date || '-' }}</div>
+          <div class="field"><strong>Date:</strong> {{ app.date ? formatDate(new Date(app.date)) : '-' }}</div>
           <div class="divider"></div>
           <div class="field"><strong>CV Letter:</strong> {{ app.coverletter || '-' }}</div>
         </div>
         <div class="full-row"><strong>Notes:</strong> {{ app.notes || '-' }}</div>
         <div class="full-row"><strong>Match Score:</strong> {{ app.matchScore !== undefined && app.matchScore !== '' ? app.matchScore + '%' : '-' }}</div>
-        <button @click="removeApplication(index)">Delete</button>
+
+        <div class="button-group">
+          <button class="edit-btn" @click="editApplication(index)">Edit</button>
+          <button class="delete-btn" @click="removeApplication(index)">Delete</button>
+        </div>
       </div>
     </div>
 
@@ -70,8 +76,9 @@ import Datepicker from 'vue3-datepicker'
 
 const form = ref({ company: '', position: '', location: '', type: '', coverletter: '', date: '', notes: '', matchScore: '' })
 const applications = ref([])
-const editing = ref({ row: null, field: null })
 const showForm = ref(false)
+const editMode = ref(false)
+const editIndex = ref(null)
 
 onMounted(() => {
   const saved = localStorage.getItem('applications')
@@ -95,16 +102,36 @@ watch(applications, (newVal) => {
 }, { deep: true })
 
 function addApplication() {
-  const randomScore = Math.floor(Math.random() * 31) + 70
-  applications.value.push({ ...form.value, matchScore: randomScore })
+  if (editMode.value) {
+    applications.value[editIndex.value] = { ...form.value }
+    editMode.value = false
+    editIndex.value = null
+  } else {
+    const randomScore = Math.floor(Math.random() * 31) + 70
+    applications.value.push({ ...form.value, matchScore: randomScore })
+  }
   form.value = { company: '', position: '', location: '', type: '', coverletter: '', date: '', notes: '', matchScore: '' }
+  showForm.value = false
 }
 
 function removeApplication(index) {
   applications.value.splice(index, 1)
 }
 
+function editApplication(index) {
+  const app = applications.value[index]
+  form.value = { ...app, date: app.date ? new Date(app.date) : '' }
+  editMode.value = true
+  editIndex.value = index
+  showForm.value = true
+}
+
 function toggleForm() {
+  if (showForm.value && editMode.value) {
+    editMode.value = false
+    editIndex.value = null
+    form.value = { company: '', position: '', location: '', type: '', coverletter: '', date: '', notes: '', matchScore: '' }
+  }
   showForm.value = !showForm.value
 }
 
@@ -115,8 +142,8 @@ function formatDate(date) {
   const day = String(date.getDate()).padStart(2, '0')
   return `${year}-${month}-${day}`
 }
-
 </script>
+
 
 <style>
 .app-container {
@@ -244,8 +271,8 @@ h1 {
 .card button {
   align-self: flex-end;
   margin-top: 10px;
-  background: #111;
-  color: white;
+  background:  rgb(87, 143, 126);
+  color: rgb(3, 3, 3);
   border: none;
   padding: 8px 12px;
   border-radius: 6px;
@@ -257,11 +284,22 @@ h1 {
 }
 
 .application-number-badge {
-  background: #578f7e;
+  background: rgb(87, 143, 126);
   color: white;
   padding: 4px 8px;
   border-radius: 4px;
 }
 
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+.edit-btn,.delete-btn {
+  padding: 16px 16px;
+  font-weight: bold;
+  border-radius: 8px;
+}
 
 </style>
