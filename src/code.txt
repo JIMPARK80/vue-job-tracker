@@ -178,3 +178,103 @@ When Reloading the Page
 [application.value = saved data]
      ↓
 [Table renders automatically]
+
+
+
+-------------------------------------------------------
+
+vue-job-tracker/
+ ├─ public/
+ ├─ src/
+ │   ├─ assets/
+ │   ├─ components/
+ │   ├─ pages/
+ │   │   ├─ ResumePage.vue      # Resume Appication page
+ │   │   └─ ApplicationsPage.vue # Managing Application page
+ │   ├─ router/
+ │   │   └─ index.js             # Setting Vue Router 
+ │   ├─ App.vue
+ │   ├─ main.js
+ │   └─ style.css
+ ├─ package.json
+ ├─ vite.config.js
+
+------------------------------------------------------------------
+
+🌟 Overall flowchart (Updated)
+1. Application Tracker
+1-1 Main Screen
+
+Application Registration Form
+
+List of registered applications (card type)
+
+On each application card:
+
+Match Score: None (Upload Resume to Match)
+
+1-2 action
+
+User enters Job Application and piles up as a card in the Add ➔ list
+
+Matching scores are always marked as "None"
+
+2. Resume Page (New)
+2-1 Features
+
+If you want to copy your resume
+
+Upload files (.txt, .pdf, etc.)
+
+2-2 Operation
+
+Save resume (local or DB)
+
+Make JD-matched based on saved resume
+
+(Matching cannot be attempted without Resume)
+
+3. Matching function (future)
+JD Input or Crawling
+
+User pastes or enters JD content
+
+Matching Request button
+
+If you press the button, send your resume + JD to the Groq AI server
+
+Matching Score Calculation
+
+Update Results
+
+Reflect Match Score (%) on the application card
+
+
+-------------------------------------------------
+
+[Non-members] → Disable the matching button
+
+[Membership/Login]
+↓
+[Free points (First 5 points)]
+↓
+[Matching using up the points]
+↓
+(In case of lack of points)
+↓
+[Playing games or paying]
+
+
+-----------------------------------------------------
+
+[1] Save resume
+↓
+[2] Paste or enter JD
+↓
+[3] [Match button] Press
+↓
+[4] Request to Groq AI server (Resume + JD)
+↓
+[5] Get matching points (%)
+↓
+[6] Update score to corresponding support card

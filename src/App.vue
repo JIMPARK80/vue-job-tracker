@@ -38,22 +38,22 @@
       <div v-for="(app, index) in applications" :key="index" class="card">
         <div class="application-number-badge">Application #{{ index + 1 }}</div>
         <div class="row-with-divider">
-          <div class="field"><strong>Comp:</strong> {{ app.company || '-' }}</div>
+          <div class="field"><strong>Company:</strong> {{ app.company || '-' }}</div>
           <div class="divider"></div>
-          <div class="field"><strong>Loc:</strong> {{ app.location || '-' }}</div>
+          <div class="field"><strong>Location:</strong> {{ app.location || '-' }}</div>
         </div>
         <div class="row-with-divider">
-          <div class="field"><strong>Pos:</strong> {{ app.position || '-' }}</div>
+          <div class="field"><strong>Position:</strong> {{ app.position || '-' }}</div>
           <div class="divider"></div>
-          <div class="field"><strong>Type:</strong> {{ app.type || '-' }}</div>
+          <div class="field"><strong>JobType:</strong> {{ app.type || '-' }}</div>
         </div>
         <div class="row-with-divider">
           <div class="field"><strong>Date:</strong> {{ app.date || '-' }}</div>
           <div class="divider"></div>
-          <div class="field"><strong>CVL:</strong> {{ app.coverletter || '-' }}</div>
+          <div class="field"><strong>CV Letter:</strong> {{ app.coverletter || '-' }}</div>
         </div>
         <div class="full-row"><strong>Notes:</strong> {{ app.notes || '-' }}</div>
-        <div class="full-row"><strong>Score:</strong> {{ app.matchScore !== undefined && app.matchScore !== '' ? app.matchScore + '%' : '-' }}</div>
+        <div class="full-row"><strong>Match Score:</strong> {{ app.matchScore !== undefined && app.matchScore !== '' ? app.matchScore + '%' : '-' }}</div>
         <button @click="removeApplication(index)">Delete</button>
       </div>
     </div>
